@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1418"/>
+      <stop offset="100%" stop-color="#07090b"/>
+    </linearGradient>
+    <linearGradient id="salt-face-top" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#e0e8f0" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="salt-face-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8d6e2" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#8ba2b5" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="salt-face-right" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8f0f8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#b0c5d6" stop-opacity="0.6"/>
+    </linearGradient>
+    <radialGradient id="salt-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#07090b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bg-grad)"/>
+
+  <!-- Ambient Glow behind the crystals -->
+  <circle cx="200" cy="210" r="140" fill="url(#salt-glow)"/>
+
+  <!-- Main Crystal Cube (Central) -->
+  <g transform="translate(10, 10)">
+    <!-- Back faces for transparency effect -->
+    <polygon points="190,100 270,140 270,230 190,190" fill="#354652" opacity="0.3" stroke="#485f70" stroke-width="0.5"/>
+    <polygon points="110,140 190,100 190,190 110,230" fill="#2d3d49" opacity="0.3" stroke="#485f70" stroke-width="0.5"/>
+
+    <!-- Left Face -->
+    <polygon points="110,140 190,190 190,280 110,230" fill="url(#salt-face-left)" stroke="#ffffff" stroke-width="0.75" opacity="0.85"/>
+    <!-- Right Face -->
+    <polygon points="190,190 270,140 270,230 190,280" fill="url(#salt-face-right)" stroke="#dbe5ee" stroke-width="0.75" opacity="0.9"/>
+    <!-- Top Face -->
+    <polygon points="190,100 270,140 190,190 110,140" fill="url(#salt-face-top)" stroke="#ffffff" stroke-width="1.25"/>
+
+    <!-- Internal facets/shading to simulate transparency/refraction -->
+    <line x1="190" y1="190" x2="190" y2="280" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+    <line x1="110" y1="140" x2="190" y2="190" stroke="#ffffff" stroke-width="1.25" opacity="0.7"/>
+    <line x1="190" y1="190" x2="270" y2="140" stroke="#ffffff" stroke-width="1.25" opacity="0.7"/>
+  </g>
+
+  <!-- Smaller Crystal Left -->
+  <g transform="translate(-50, 100) scale(0.65)">
+    <polygon points="190,100 270,140 190,190 110,140" fill="url(#salt-face-top)" stroke="#fff" stroke-width="1"/>
+    <polygon points="110,140 190,190 190,280 110,230" fill="url(#salt-face-left)" stroke="#fff" stroke-width="0.75" opacity="0.8"/>
+    <polygon points="190,190 270,140 270,230 190,280" fill="url(#salt-face-right)" stroke="#fff" stroke-width="0.75" opacity="0.8"/>
+  </g>
+
+  <!-- Smaller Crystal Right -->
+  <g transform="translate(130, 80) scale(0.55)">
+    <polygon points="190,100 270,140 190,190 110,140" fill="url(#salt-face-top)" stroke="#fff" stroke-width="1"/>
+    <polygon points="110,140 190,190 190,280 110,230" fill="url(#salt-face-left)" stroke="#fff" stroke-width="0.75" opacity="0.8"/>
+    <polygon points="190,190 270,140 270,230 190,280" fill="url(#salt-face-right)" stroke="#fff" stroke-width="0.75" opacity="0.8"/>
+  </g>
+
+  <!-- Sparkling Cross Flairs -->
+  <path d="M 200,90 L 200,120 M 185,105 L 215,105" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.85" filter="drop-shadow(0px 0px 3px #fff)"/>
+  <path d="M 120,225 L 120,245 M 110,235 L 130,235" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.7" filter="drop-shadow(0px 0px 2px #fff)"/>
+  <path d="M 290,130 L 290,150 M 280,140 L 300,140" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.7" filter="drop-shadow(0px 0px 2px #fff)"/>
+</svg>

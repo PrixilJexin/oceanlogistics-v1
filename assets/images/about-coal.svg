@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14151a"/>
+      <stop offset="60%" stop-color="#0c0d10"/>
+      <stop offset="100%" stop-color="#050608"/>
+    </linearGradient>
+    <linearGradient id="tower-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a1c24"/>
+      <stop offset="50%" stop-color="#101116"/>
+      <stop offset="100%" stop-color="#07080a"/>
+    </linearGradient>
+    <linearGradient id="gold-glow" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D4A843" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#D4A843" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="sun-glow" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#D4A843" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#FF5500" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#050608" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="750" fill="url(#bg-grad)"/>
+
+  <!-- Sunset Glow -->
+  <circle cx="300" cy="550" r="300" fill="url(#sun-glow)"/>
+
+  <!-- Decorative Grid Lines (High Tech Minimalist) -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.05">
+    <line x1="50" y1="0" x2="50" y2="750"/>
+    <line x1="150" y1="0" x2="150" y2="750"/>
+    <line x1="250" y1="0" x2="250" y2="750"/>
+    <line x1="350" y1="0" x2="350" y2="750"/>
+    <line x1="450" y1="0" x2="450" y2="750"/>
+    <line x1="550" y1="0" x2="550" y2="750"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="0" y1="450" x2="600" y2="450"/>
+    <line x1="0" y1="600" x2="600" y2="600"/>
+  </g>
+
+  <!-- Abstract Industrial Silhouette Silo 1 -->
+  <g transform="translate(120, 250)">
+    <rect width="140" height="420" rx="10" fill="url(#tower-grad)" stroke="#262a35" stroke-width="1"/>
+    <!-- Metal horizontal ribs -->
+    <line x1="0" y1="80" x2="140" y2="80" stroke="#262a35" stroke-width="1.5"/>
+    <line x1="0" y1="160" x2="140" y2="160" stroke="#262a35" stroke-width="1.5"/>
+    <line x1="0" y1="240" x2="140" y2="240" stroke="#262a35" stroke-width="1.5"/>
+    <line x1="0" y1="320" x2="140" y2="320" stroke="#262a35" stroke-width="1.5"/>
+    <!-- Gold highlights on rib edges -->
+    <circle cx="15" cy="80" r="2" fill="#D4A843"/>
+    <circle cx="125" cy="80" r="2" fill="#D4A843"/>
+    <circle cx="15" cy="240" r="2" fill="#D4A843"/>
+    <circle cx="125" cy="240" r="2" fill="#D4A843"/>
+  </g>
+
+  <!-- Silo 2 (Back taller) -->
+  <g transform="translate(320, 180)">
+    <rect width="120" height="490" rx="8" fill="url(#tower-grad)" stroke="#1f222b" stroke-width="1"/>
+    <!-- Chimney bands -->
+    <line x1="0" y1="60" x2="120" y2="60" stroke="#262a35" stroke-width="1.5"/>
+    <line x1="0" y1="140" x2="120" y2="140" stroke="#262a35" stroke-width="1.5"/>
+    <line x1="0" y1="220" x2="120" y2="220" stroke="#262a35" stroke-width="1.5"/>
+    <!-- Rising smoke plume (stylized minimal SVG path) -->
+    <path d="M 60,-50 C 40,-120 120,-180 80,-240" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.15" stroke-dasharray="5,5"/>
+  </g>
+
+  <!-- Industrial Pipeline Structure (Intersecting diagonals) -->
+  <path d="M 60,620 L 540,620 M 60,630 L 540,630" stroke="#1c1d24" stroke-width="4"/>
+  <!-- Diagonal pipe -->
+  <path d="M 230,620 L 350,180" stroke="#2a2c36" stroke-width="12" stroke-linecap="round" opacity="0.95"/>
+  <!-- Gold wire/conduit on pipe -->
+  <path d="M 230,620 L 350,180" stroke="#D4A843" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Scaffold tower (thin trellis structure) -->
+  <g stroke="#262a35" stroke-width="1" fill="none" opacity="0.8" transform="translate(70, 380)">
+    <line x1="0" y1="290" x2="40" y2="0"/>
+    <line x1="40" y1="290" x2="0" y2="0"/>
+    <line x1="0" y1="290" x2="0" y2="0"/>
+    <line x1="40" y1="290" x2="40" y2="0"/>
+    <!-- Cross braces -->
+    <line x1="0" y1="50" x2="40" y2="50"/>
+    <line x1="0" y1="110" x2="40" y2="110"/>
+    <line x1="0" y1="170" x2="40" y2="170"/>
+    <line x1="0" y1="230" x2="40" y2="230"/>
+    <line x1="0" y1="50" x2="40" y2="110"/>
+    <line x1="40" y1="50" x2="0" y2="110"/>
+    <line x1="0" y1="170" x2="40" y2="230"/>
+    <line x1="40" y1="170" x2="0" y2="230"/>
+  </g>
+
+  <!-- Glowing indicator lights (luxury evening aesthetic) -->
+  <g filter="drop-shadow(0px 0px 4px #D4A843)">
+    <circle cx="120" cy="330" r="3" fill="#D4A843"/>
+    <circle cx="260" cy="410" r="3" fill="#D4A843"/>
+    <circle cx="320" cy="240" r="3" fill="#D4A843"/>
+    <circle cx="320" cy="320" r="3" fill="#D4A843"/>
+    <circle cx="440" cy="400" r="3" fill="#D4A843"/>
+    <!-- White-hot warning light at top of chimney -->
+    <circle cx="380" cy="180" r="3.5" fill="#ffffff" filter="drop-shadow(0px 0px 6px #FF5500)"/>
+  </g>
+
+  <!-- Forefront dark silhouetted hills/mounds (coal piles) -->
+  <path d="M -50,750 C 100,700 200,650 350,690 C 450,710 520,730 650,750 Z" fill="#040405"/>
+  <path d="M 150,750 C 250,680 400,680 500,720 C 560,730 620,740 680,750 Z" fill="#07080a" opacity="0.8"/>
+
+  <!-- Vertical glowing light beam (Laser/Creative accent) -->
+  <rect x="250" y="0" width="1.5" height="620" fill="url(#gold-glow)"/>
+</svg>
