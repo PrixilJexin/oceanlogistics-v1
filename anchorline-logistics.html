@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anchorline — Ocean Freight &amp; Trade Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#071B2E;
+    --navy:#0E2B44;
+    --marine:#0E4C73;
+    --cyan:#04C7B8;
+    --cyan-bright:#37E6D8;
+    --foam:#F5F9FC;
+    --foam-dim:#E4EDF3;
+    --slate:#54687A;
+    --slate-light:#8CA0B3;
+    --font-display:'Fraunces', serif;
+    --font-hero:'Big Shoulders Display', sans-serif;
+    --font-body:'Outfit', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --ease:cubic-bezier(.16,.8,.24,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    background:var(--foam);
+    color:var(--navy-deep);
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  section{position:relative;}
+  ::selection{background:var(--cyan);color:var(--navy-deep);}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;background:var(--cyan);display:inline-block;
+  }
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;}
+
+  .btn{
+    font-family:var(--font-body);
+    font-weight:500;
+    font-size:.95rem;
+    padding:.95em 1.9em;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease), background .35s ease, color .35s ease, border-color .35s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--cyan);
+    color:var(--navy-deep);
+    box-shadow:0 0 0 0 rgba(4,199,184,.5);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(4,199,184,.55);}
+  .btn-ghost{
+    background:transparent;
+    border-color:rgba(255,255,255,.35);
+    color:#fff;
+  }
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-3px);}
+  .btn-ghost-dark{border-color:rgba(7,27,46,.25);color:var(--navy-deep);}
+  .btn-ghost-dark:hover{border-color:var(--navy-deep);background:rgba(7,27,46,.05);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;width:100%;z-index:100;
+    padding:22px 5vw;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .5s var(--ease), padding .5s var(--ease), box-shadow .5s var(--ease), backdrop-filter .5s ease;
+  }
+  header.scrolled{
+    background:rgba(7,27,46,.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    padding:14px 5vw;
+    box-shadow:0 10px 30px -20px rgba(0,0,0,.4);
+  }
+  .logo{
+    display:flex;align-items:center;gap:.6em;
+    font-family:var(--font-display);
+    font-size:1.35rem;
+    color:#fff;
+    letter-spacing:.01em;
+  }
+  .logo svg{width:26px;height:26px;flex-shrink:0;}
+  nav ul{display:flex;gap:2.4em;}
+  nav a{
+    font-size:.88rem;color:rgba(255,255,255,.82);position:relative;font-weight:400;
+    transition:color .3s ease;
+  }
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--cyan);
+    transition:width .4s var(--ease);
+  }
+  nav a:hover{color:#fff;}
+  nav a:hover::after{width:100%;}
+  .nav-links{display:flex;align-items:center;gap:2.4em;}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100vh;min-height:680px;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;
+    background:var(--navy-deep);
+  }
+  .hero-media{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;}
+  .hero-media video, .hero-media .fallback-waves{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+  .fallback-waves{display:none;}
+  .hero-media.video-failed video{display:none;}
+  .hero-media.video-failed .fallback-waves{display:block;}
+
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(7,27,46,.55) 0%, rgba(7,27,46,.35) 38%, rgba(7,27,46,.55) 72%, rgba(7,27,46,.95) 100%),
+      linear-gradient(90deg, rgba(7,27,46,.55) 0%, rgba(7,27,46,.05) 45%);
+  }
+
+  /* ---- Parallax layer system ---- */
+  .hero-parallax{
+    position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;
+    /* nav height top clearance + HUD bar bottom clearance */
+    padding:80px 0 56px;
+    pointer-events:none;
+    will-change:transform;
+    transform-style:preserve-3d;
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    padding:0 5vw;
+    max-width:860px;
+    width:100%;
+    pointer-events:auto;
+    will-change:transform;
+    transform-style:preserve-3d;
+    transition:transform .08s linear;
+  }
+  .hero-content .eyebrow-wrap{
+    will-change:transform;
+    transition:transform .08s linear;
+    display:inline-block;
+  }
+  .hero-content h1{
+    will-change:transform;
+    transition:transform .08s linear;
+  }
+  .hero-content .sub-wrap{
+    will-change:transform;
+    transition:transform .08s linear;
+    display:inline-block;
+    width:100%;
+  }
+  .hero-content .cta-wrap{
+    will-change:transform;
+    transition:transform .08s linear;
+    display:inline-block;
+  }
+  .hero-content .eyebrow{opacity:0;transform:translateY(14px);animation:reveal .9s var(--ease) .3s forwards;}
+  .hero h1{
+    font-family:var(--font-hero);
+    color:#fff;
+    font-size:clamp(2.6rem, 5vw, 4.4rem);
+    line-height:1.0;
+    margin:.35em 0 .25em;
+    font-weight:800;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+  }
+  .hero h1 .line{display:block;overflow:hidden;}
+  .hero h1 .line span{
+    display:block;transform:translateY(110%);animation:lineUp 1s var(--ease) forwards;
+  }
+  .hero h1 .line:nth-child(1) span{animation-delay:.45s;}
+  .hero h1 .line:nth-child(2) span{animation-delay:.6s;}
+  .hero h1 .line:nth-child(3) span{animation-delay:.75s; color:var(--cyan-bright);}
+
+  .hero p.sub{
+    color:rgba(255,255,255,.78);font-size:1rem;max-width:520px;margin-bottom:1.6em;
+    opacity:0;transform:translateY(14px);animation:reveal .9s var(--ease) 1s forwards;
+    font-weight:300;line-height:1.6;
+  }
+  .hero .hero-ctas{
+    display:flex;gap:.8em;flex-wrap:wrap;align-items:center;
+    opacity:0;transform:translateY(14px);animation:reveal .9s var(--ease) 1.15s forwards;
+  }
+
+  @keyframes reveal{to{opacity:1;transform:translateY(0);}}
+  @keyframes lineUp{to{transform:translateY(0);}}
+
+  /* HUD ticker */
+  .hud{
+    position:absolute;bottom:0;left:0;width:100%;z-index:3;
+    border-top:1px solid rgba(255,255,255,.14);
+    background:rgba(7,27,46,.55);
+    backdrop-filter:blur(6px);
+    padding:12px 0;
+    overflow:hidden;
+    opacity:0;animation:reveal 1s var(--ease) 1.4s forwards;
+  }
+  .hud-track{
+    display:flex;white-space:nowrap;
+    animation:hudScroll 26s linear infinite;
+  }
+  .hud-track span{
+    font-family:var(--font-mono);font-size:.72rem;color:var(--cyan-bright);
+    letter-spacing:.05em;padding-right:3.5em;
+    display:inline-flex;align-items:center;gap:.6em;
+  }
+  .hud-track span::before{content:'●';font-size:.55em;color:var(--cyan);}
+  @keyframes hudScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  .scroll-cue{
+    position:absolute;right:5vw;bottom:64px;z-index:3;color:rgba(255,255,255,.6);
+    display:flex;flex-direction:column;align-items:center;gap:.6em;
+    font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;
+    opacity:0;animation:reveal 1s var(--ease) 1.6s forwards;
+  }
+  .scroll-cue .stick{width:1px;height:38px;background:linear-gradient(180deg, rgba(255,255,255,.7), transparent);position:relative;overflow:hidden;}
+  .scroll-cue .stick::after{
+    content:'';position:absolute;top:-38px;left:0;width:100%;height:38px;background:var(--cyan);
+    animation:cueDrop 2s var(--ease) infinite;
+  }
+  @keyframes cueDrop{to{top:38px;}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-wrap{
+    background:var(--navy);
+    padding:20px 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .marquee{display:flex;width:max-content;animation:marquee 32s linear infinite;}
+  .marquee span{
+    font-family:var(--font-mono);color:var(--slate-light);font-size:.82rem;letter-spacing:.12em;
+    padding:0 2.4em;border-right:1px solid rgba(255,255,255,.12);text-transform:uppercase;
+  }
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- REVEAL UTILITY ---------- */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal-stagger > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger > *:nth-child(2){transition-delay:.16s;}
+  .reveal-stagger > *:nth-child(3){transition-delay:.27s;}
+  .reveal-stagger > *:nth-child(4){transition-delay:.38s;}
+
+  /* ---------- SECTION SHELL ---------- */
+  .section{padding:9em 5vw;}
+  .section-head{max-width:640px;margin-bottom:3.5em;}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.7rem);margin-top:.4em;color:var(--navy-deep);font-weight:500;}
+  .section-head p{color:var(--slate);font-size:1.02rem;margin-top:.9em;font-weight:300;}
+  .section-dark{background:var(--navy-deep);color:var(--foam);}
+  .section-dark .section-head p{color:var(--slate-light);}
+  .section-dark .section-head h2{color:#fff;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6em;}
+  .service-card{
+    background:#fff;border:1px solid var(--foam-dim);border-radius:18px;
+    padding:2.4em 1.8em;
+    transition:transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s ease;
+    perspective:800px;
+  }
+  .service-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 50px -30px rgba(14,76,115,.35);
+    border-color:transparent;
+  }
+  .service-card .icon{
+    width:46px;height:46px;margin-bottom:1.4em;color:var(--marine);
+  }
+  .service-card .icon svg{width:100%;height:100%;}
+  .service-card .icon path,.service-card .icon circle,.service-card .icon rect,.service-card .icon line{
+    stroke-dasharray:120;stroke-dashoffset:120;transition:stroke-dashoffset 1s var(--ease);
+  }
+  .service-card:hover .icon path,.service-card:hover .icon circle,.service-card:hover .icon rect,.service-card:hover .icon line{
+    stroke-dashoffset:0;
+  }
+  .service-card h3{font-size:1.15rem;font-weight:600;margin-bottom:.6em;color:var(--navy-deep);}
+  .service-card p{color:var(--slate);font-size:.92rem;font-weight:300;}
+  .service-card .num{font-family:var(--font-mono);font-size:.72rem;color:var(--cyan);letter-spacing:.15em;margin-bottom:1.2em;display:block;}
+
+  /* ---------- STATS ---------- */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2em;margin-top:1em;}
+  .stat{border-left:1px solid rgba(255,255,255,.14);padding-left:1.4em;}
+  .stat .num{
+    font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.4rem);color:var(--cyan-bright);font-weight:500;
+    display:block;
+  }
+  .stat .label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-light);margin-top:.5em;display:block;}
+
+  /* ---------- NETWORK / MAP ---------- */
+  .network-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:3em;align-items:center;
+  }
+  .map-box{background:var(--navy);border-radius:22px;padding:2em;position:relative;overflow:hidden;}
+  .map-box svg{width:100%;height:auto;display:block;}
+  .route{stroke-dasharray:6 6;stroke-dashoffset:1000;transition:stroke-dashoffset 2.4s var(--ease);}
+  .map-box.in .route{stroke-dashoffset:0;}
+  .port-dot{transform-origin:center;transform-box:fill-box;}
+  .map-box.in .port-dot{animation:pulseDot 2.6s ease-in-out infinite;}
+  .port-dot:nth-child(3n){animation-delay:.4s;}
+  .port-dot:nth-child(4n){animation-delay:.9s;}
+  @keyframes pulseDot{0%,100%{opacity:.55;}50%{opacity:1;}}
+
+  .port-list{display:grid;grid-template-columns:1fr 1fr;gap:.9em 1.6em;margin-top:1.6em;}
+  .port-list li{
+    font-family:var(--font-mono);font-size:.85rem;color:var(--slate);
+    display:flex;align-items:center;gap:.7em;
+    padding:.5em 0;border-bottom:1px dashed var(--foam-dim);
+  }
+  .port-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+
+  /* ---------- PROCESS ---------- */
+  .process-track{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:1.5em;margin-top:2em;}
+  .process-line{
+    position:absolute;top:22px;left:0;height:1px;background:var(--foam-dim);width:100%;
+  }
+  .process-line-fill{
+    position:absolute;top:0;left:0;height:100%;width:0;background:var(--cyan);
+    transition:width 1.6s var(--ease);
+  }
+  .process-track.in .process-line-fill{width:100%;}
+  .process-step{position:relative;padding-top:3.6em;}
+  .process-step .dot{
+    position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;
+    background:#fff;border:1px solid var(--foam-dim);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:.78rem;color:var(--marine);
+    transition:background .6s ease, color .6s ease, border-color .6s ease, transform .6s var(--ease);
+  }
+  .process-track.in .process-step .dot{background:var(--navy-deep);color:var(--cyan-bright);border-color:var(--navy-deep);}
+  .process-step h3{font-size:1.02rem;font-weight:600;margin-bottom:.5em;}
+  .process-step p{font-size:.86rem;color:var(--slate);font-weight:300;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6em;}
+  .testi-card{
+    background:#fff;border-radius:18px;padding:2.4em 2em;border:1px solid var(--foam-dim);
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+  }
+  .testi-card:hover{transform:translateY(-6px);box-shadow:0 24px 40px -28px rgba(14,76,115,.3);}
+  .testi-card .quote-mark{font-family:var(--font-display);font-size:2.6rem;color:var(--cyan);line-height:1;display:block;margin-bottom:.2em;}
+  .testi-card p.quote{color:var(--navy-deep);font-size:1rem;font-weight:400;margin-bottom:1.6em;}
+  .testi-card .who{font-family:var(--font-mono);font-size:.78rem;color:var(--slate);}
+  .testi-card .who b{color:var(--navy-deep);font-family:var(--font-body);font-weight:600;display:block;font-size:.92rem;margin-bottom:.15em;}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    margin:0 5vw;border-radius:26px;
+    background:linear-gradient(120deg, var(--navy-deep), var(--marine) 60%, #0a5f7d);
+    padding:4.5em 4vw;text-align:center;position:relative;overflow:hidden;
+  }
+  .cta-banner::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 20%, rgba(4,199,184,.25), transparent 55%);
+  }
+  .cta-banner h2{color:#fff;font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:.5em;position:relative;font-weight:500;}
+  .cta-banner p{color:rgba(255,255,255,.75);margin-bottom:1.8em;position:relative;font-weight:300;}
+  .cta-banner .hero-ctas{justify-content:center;position:relative;display:flex;gap:1em;flex-wrap:wrap;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-deep);color:var(--slate-light);padding:5em 5vw 2em;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5em;padding-bottom:3em;border-bottom:1px solid rgba(255,255,255,.08);}
+  .footer-grid h4{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:1.4em;}
+  .footer-grid li{margin-bottom:.8em;font-size:.9rem;}
+  .footer-grid a:hover{color:var(--cyan-bright);}
+  .footer-brand p{font-size:.9rem;max-width:280px;margin-top:1em;font-weight:300;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2em;font-size:.78rem;font-family:var(--font-mono);color:var(--slate);flex-wrap:wrap;gap:1em;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1000px){
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .network-wrap{grid-template-columns:1fr;}
+    .process-track{grid-template-columns:repeat(3,1fr);row-gap:3em;}
+    .process-line, .process-line-fill{display:none;}
+    .testi-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    /* Hero tablet */
+    .hero h1{font-size:clamp(2.4rem, 5.5vw, 3.8rem);}
+    .hero-content{max-width:680px;}
+  }
+  @media (max-width:640px){
+    nav ul{display:none;}
+    .services-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .process-track{grid-template-columns:1fr 1fr;}
+    .section{padding:6em 6vw;}
+    .footer-grid{grid-template-columns:1fr;}
+    /* Hero mobile */
+    .hero{min-height:100svh;}
+    .hero-parallax{padding:72px 0 60px;}
+    .hero h1{font-size:clamp(2rem, 9vw, 3rem);line-height:1.05;}
+    .hero p.sub{font-size:.95rem;margin-bottom:1.4em;}
+    .hero .hero-ctas{flex-direction:column;align-items:flex-start;gap:.7em;}
+    .hero .hero-ctas .btn{width:100%;justify-content:center;}
+    .scroll-cue{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <a href="#" class="logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v11"/><path d="M6 9l6 4 6-4"/><path d="M3 18c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0" stroke-linecap="round"/></svg>
+    Anchorline
+  </a>
+  <div class="nav-links">
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#network">Network</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn btn-ghost">Track Shipment</a>
+  </div>
+</header>
+
+<section class="hero" id="heroSection">
+  <div class="hero-media" id="heroMedia">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1494412574643-ea8e7502e3b9?q=80&w=1600&auto=format&fit=crop" id="heroVideo">
+      <source src="vidssave.com Ships On The Move_ 1 min aerial stock footage montage (035) 1080P.mp4" type="video/mp4">
+    </video>
+    <svg class="fallback-waves" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#0E2B44"/>
+      <path d="M0 500 Q150 460 300 500 T600 500 T900 500 T1200 500 V800 H0 Z" fill="#0E4C73"/>
+      <path d="M0 560 Q150 520 300 560 T600 560 T900 560 T1200 560 V800 H0 Z" fill="#0A3A5C"/>
+      <path d="M0 620 Q150 590 300 620 T600 620 T900 620 T1200 620 V800 H0 Z" fill="#071B2E"/>
+    </svg>
+  </div>
+  <div class="hero-scrim"></div>
+
+  <div class="hero-parallax" id="heroParallax">
+    <div class="hero-content" id="heroContent">
+      <div class="eyebrow-wrap" data-depth="0.5">
+        <span class="eyebrow">Ocean Freight &amp; Trade Logistics</span>
+      </div>
+      <h1 data-depth="1">
+        <span class="line"><span>Cargo carried with</span></span>
+        <span class="line"><span>the certainty</span></span>
+        <span class="line"><span>of tides.</span></span>
+      </h1>
+      <div class="sub-wrap" data-depth="0.6">
+        <p class="sub">Anchorline plans, ships, and clears freight across 140 ports worldwide — so your containers arrive exactly when you said they would.</p>
+      </div>
+      <div class="cta-wrap" data-depth="0.4">
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Request a Quote</a>
+          <a href="#network" class="btn btn-ghost">Explore Our Network</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud">
+    <div class="hud-track" id="hudTrack"></div>
+  </div>
+
+  <div class="scroll-cue"><span>SCROLL</span><div class="stick"></div></div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section class="section" id="services">
+  <div class="section-head reveal">
+    <span class="eyebrow">What We Handle</span>
+    <h2>Every link in the ocean supply chain</h2>
+    <p>From booking the vessel to clearing the container at the gate, one team manages the entire route.</p>
+  </div>
+  <div class="services-grid reveal-stagger">
+    <div class="service-card">
+      <span class="num">01</span>
+      <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 30h36l-4 10H10z"/><path d="M10 30V16h4l4-8h12l4 8h4v14"/><line x1="24" y1="8" x2="24" y2="30"/></svg></div>
+      <h3>Ocean Freight</h3>
+      <p>Full and less-than-container loads booked across every major trade lane, with weekly sailings on the routes that matter to you.</p>
+    </div>
+    <div class="service-card">
+      <span class="num">02</span>
+      <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="10" width="32" height="28" rx="2"/><path d="M8 20h32"/><path d="M16 10v-4h16v4"/><circle cx="24" cy="29" r="4"/></svg></div>
+      <h3>Customs Clearance</h3>
+      <p>In-house brokerage clears your goods before the vessel docks, so containers move straight to the yard.</p>
+    </div>
+    <div class="service-card">
+      <span class="num">03</span>
+      <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 20l18-12 18 12v18H6z"/><path d="M18 38V24h12v14"/></svg></div>
+      <h3>Warehousing &amp; Distribution</h3>
+      <p>Bonded and duty-paid storage at every major port, with next-day inland distribution on call.</p>
+    </div>
+    <div class="service-card">
+      <span class="num">04</span>
+      <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 8h18l6 6v26H12z"/><path d="M30 8v6h6"/><line x1="18" y1="24" x2="30" y2="24"/><line x1="18" y1="30" x2="30" y2="30"/></svg></div>
+      <h3>Trade Compliance</h3>
+      <p>Tariff classification, documentation, and origin certificates handled before you ever need to ask.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="section-head reveal">
+    <span class="eyebrow">By The Numbers</span>
+    <h2>A fleet of relationships, not just ships</h2>
+  </div>
+  <div class="stats-grid reveal-stagger">
+    <div class="stat"><span class="num" data-target="140">0</span><span class="label">Ports Served</span></div>
+    <div class="stat"><span class="num" data-target="2400000" data-suffix="">0</span><span class="label">TEU Moved / Year</span></div>
+    <div class="stat"><span class="num" data-target="96" data-suffix="%">0</span><span class="label">On-Time Delivery</span></div>
+    <div class="stat"><span class="num" data-target="45" data-suffix="">0</span><span class="label">Years At Sea</span></div>
+  </div>
+</section>
+
+<section class="section" id="network">
+  <div class="network-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Global Network</span>
+      <h2 style="margin-top:.4em;font-size:clamp(1.8rem,3.4vw,2.7rem);">Route coverage across eight core ports</h2>
+      <p style="color:var(--slate);margin-top:.9em;font-weight:300;">Anchorline owns slot allocation on trunk routes connecting Europe, Asia, and the Americas, with feeder services reaching another 130 secondary ports.</p>
+      <ul class="port-list">
+        <li>Rotterdam, NL</li>
+        <li>Singapore, SG</li>
+        <li>Shanghai, CN</li>
+        <li>Los Angeles, US</li>
+        <li>Hamburg, DE</li>
+        <li>Jebel Ali, AE</li>
+        <li>Santos, BR</li>
+        <li>Sydney, AU</li>
+      </ul>
+    </div>
+    <div class="map-box reveal" id="mapBox">
+      <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <path class="route" d="M60 90 Q 180 40 260 100 T 440 130" stroke="#04C7B8" stroke-width="1.4" fill="none"/>
+        <path class="route" d="M60 90 Q 150 220 260 210 T 420 230" stroke="#37E6D8" stroke-width="1.4" fill="none" opacity=".6"/>
+        <path class="route" d="M260 100 Q 300 160 440 230" stroke="#04C7B8" stroke-width="1.4" fill="none" opacity=".5"/>
+        <circle class="port-dot" cx="60" cy="90" r="5" fill="#37E6D8"/>
+        <circle class="port-dot" cx="260" cy="100" r="5" fill="#37E6D8"/>
+        <circle class="port-dot" cx="440" cy="130" r="5" fill="#37E6D8"/>
+        <circle class="port-dot" cx="260" cy="210" r="5" fill="#37E6D8"/>
+        <circle class="port-dot" cx="420" cy="230" r="5" fill="#37E6D8"/>
+        <circle class="port-dot" cx="120" cy="180" r="5" fill="#37E6D8"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process" style="background:var(--foam-dim);">
+  <div class="section-head reveal">
+    <span class="eyebrow">How It Moves</span>
+    <h2>From booking to final delivery</h2>
+    <p>Five handoffs, one point of contact — your shipment never disappears between carriers.</p>
+  </div>
+  <div class="process-track reveal">
+    <div class="process-line"><div class="process-line-fill"></div></div>
+    <div class="process-step"><div class="dot">01</div><h3>Book</h3><p>Confirm space on the sailing that fits your schedule.</p></div>
+    <div class="process-step"><div class="dot">02</div><h3>Pick Up</h3><p>Cargo collected and loaded into container at origin.</p></div>
+    <div class="process-step"><div class="dot">03</div><h3>Transit</h3><p>Vessel tracked end-to-end across open water.</p></div>
+    <div class="process-step"><div class="dot">04</div><h3>Clear</h3><p>Customs and documentation cleared before arrival.</p></div>
+    <div class="process-step"><div class="dot">05</div><h3>Deliver</h3><p>Final-mile delivery to your door or warehouse.</p></div>
+  </div>
+</section>
+
+<section class="section" id="testimonials">
+  <div class="section-head reveal">
+    <span class="eyebrow">Client Voices</span>
+    <h2>Trusted by shippers who can't afford delays</h2>
+  </div>
+  <div class="testi-grid reveal-stagger">
+    <div class="testi-card">
+      <span class="quote-mark">"</span>
+      <p class="quote">Anchorline's customs desk cleared a shipment in nine hours that used to take us three days with our old forwarder.</p>
+      <div class="who"><b>Priya Nandakumar</b>Logistics Lead, Kestrel Textiles</div>
+    </div>
+    <div class="testi-card">
+      <span class="quote-mark">"</span>
+      <p class="quote">We finally have one dashboard for every container instead of five different carrier logins to check each morning.</p>
+      <div class="who"><b>Marcus Feldt</b>Supply Chain Director, Norrland Foods</div>
+    </div>
+    <div class="testi-card">
+      <span class="quote-mark">"</span>
+      <p class="quote">Our on-time rate on the transpacific lane went from 81% to 97% within two quarters of switching.</p>
+      <div class="who"><b>Diego Alarcón</b>Operations, Vantage Components</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" style="padding-top:0;">
+  <div class="cta-banner reveal">
+    <h2>Ready to move your next shipment?</h2>
+    <p>Tell us your origin, destination, and cargo — we'll send back a quote and sailing schedule within one business day.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Request a Quote</a>
+      <a href="#" class="btn btn-ghost">Speak to a Specialist</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="color:#fff;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v11"/><path d="M6 9l6 4 6-4"/><path d="M3 18c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0" stroke-linecap="round"/></svg>
+        Anchorline
+      </a>
+      <p>Ocean freight and trade logistics across 140 ports, since 1981.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Ocean Freight</a></li>
+        <li><a href="#services">Customs Clearance</a></li>
+        <li><a href="#services">Warehousing</a></li>
+        <li><a href="#services">Trade Compliance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Track a Shipment</a></li>
+        <li><a href="#">Rate Calculator</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#network">Port Network</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Anchorline Maritime Logistics. All rights reserved.</span>
+    <span>IMO REGISTERED · AEO CERTIFIED</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hero video fallback
+  const heroMedia = document.getElementById('heroMedia');
+  const heroVideo = document.getElementById('heroVideo');
+  heroVideo.addEventListener('error', () => heroMedia.classList.add('video-failed'));
+  setTimeout(() => { if(heroVideo.readyState === 0){ heroMedia.classList.add('video-failed'); } }, 3500);
+
+  // ============================================================
+  // HERO PARALLAX — cursor (desktop) + gyroscope (mobile)
+  // ============================================================
+  (function(){
+    const heroSection  = document.getElementById('heroSection');
+    const heroContent  = document.getElementById('heroContent');
+    const eyebrowEl    = heroContent.querySelector('.eyebrow-wrap');
+    const h1El         = heroContent.querySelector('h1');
+    const subEl        = heroContent.querySelector('.sub-wrap');
+    const ctaEl        = heroContent.querySelector('.cta-wrap');
+
+    // Each layer gets a different depth multiplier for 3-D feel
+    const layers = [
+      { el: eyebrowEl, dx: 7,  dy: 5  },
+      { el: h1El,      dx: 14, dy: 10 },
+      { el: subEl,     dx: 9,  dy: 6  },
+      { el: ctaEl,     dx: 6,  dy: 4  },
+    ];
+
+    // Smooth lerp targets
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    const LERP = 0.065; // smoothing (lower = smoother/slower)
+
+    function applyTransform(nx, ny) {
+      layers.forEach(({ el, dx, dy }) => {
+        if (!el) return;
+        const tx = nx * dx;
+        const ty = ny * dy;
+        el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+      });
+    }
+
+    function lerp(a, b, t){ return a + (b - a) * t; }
+
+    function tick(){
+      currentX = lerp(currentX, targetX, LERP);
+      currentY = lerp(currentY, targetY, LERP);
+      applyTransform(currentX, currentY);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+    if (!isMobile) {
+      // ---- Desktop: mouse move ----
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        // Normalise to [-1, 1]
+        targetX = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+        targetY = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        targetX = 0;
+        targetY = 0;
+      });
+    } else {
+      // ---- Mobile: gyroscope ----
+      const requestGyro = () => {
+        if (typeof DeviceOrientationEvent !== 'undefined' &&
+            typeof DeviceOrientationEvent.requestPermission === 'function') {
+          // iOS 13+ requires explicit permission
+          DeviceOrientationEvent.requestPermission()
+            .then(state => {
+              if (state === 'granted') listenGyro();
+            })
+            .catch(console.warn);
+        } else {
+          // Android / non-permission browsers
+          listenGyro();
+        }
+      };
+
+      function listenGyro(){
+        let baseGamma = null, baseBeta = null;
+        window.addEventListener('deviceorientation', (e) => {
+          if (e.gamma === null || e.beta === null) return;
+          if (baseGamma === null) { baseGamma = e.gamma; baseBeta = e.beta; }
+          // gamma = left/right tilt (-90 to 90), beta = front/back (-180 to 180)
+          const gx = Math.max(-30, Math.min(30, e.gamma - baseGamma)) / 30; // [-1,1]
+          const gy = Math.max(-30, Math.min(30, e.beta  - baseBeta))  / 30;
+          targetX =  gx;
+          targetY =  gy;
+        }, { passive: true });
+      }
+
+      // Try to start gyro on first user interaction (needed for iOS)
+      let gyroStarted = false;
+      const startGyro = () => {
+        if (!gyroStarted) { gyroStarted = true; requestGyro(); }
+      };
+      document.addEventListener('touchstart', startGyro, { once: true, passive: true });
+      // Also try immediately (works on Android)
+      requestGyro();
+    }
+  })();
+
+  // HUD ticker content
+  const hudData = [
+    'VESSEL: MV ANCHORLINE PIONEER', 'POS 1°16′N 103°50′E', 'HDG 072°', 'SPEED 18.4 KN', 'ETA SINGAPORE 04:12',
+    'VESSEL: MV NORTHERN TRADEWIND', 'POS 51°57′N 4°08′E', 'HDG 214°', 'SPEED 16.1 KN', 'ETA ROTTERDAM 22:40'
+  ];
+  const hudTrack = document.getElementById('hudTrack');
+  hudTrack.innerHTML = [...hudData, ...hudData].map(t => `<span>${t}</span>`).join('');
+
+  // Marquee content
+  const ports = ['ROTTERDAM','SINGAPORE','SHANGHAI','LOS ANGELES','HAMBURG','JEBEL ALI','SANTOS','SYDNEY'];
+  const marquee = document.getElementById('marquee');
+  marquee.innerHTML = [...ports, ...ports].map(p => `<span>${p}</span>`).join('');
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.18 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Map route draw
+  const mapBox = document.getElementById('mapBox');
+  const mapIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ mapBox.classList.add('in'); mapIO.unobserve(mapBox); } });
+  }, { threshold: 0.3 });
+  mapIO.observe(mapBox);
+
+  // Process line draw
+  const processTrack = document.querySelector('.process-track');
+  const procIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ processTrack.classList.add('in'); procIO.unobserve(processTrack); } });
+  }, { threshold: 0.3 });
+  procIO.observe(processTrack);
+
+  // Counter animation
+  const counters = document.querySelectorAll('.stat .num');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now){
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.floor(eased * target);
+          el.textContent = (target > 10000 ? (val/1e6).toFixed(2) + 'M' : val) + suffix;
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterIO.observe(c));
+
+  // Smooth anchor scroll offset
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if(id.length > 1){
+        const target = document.querySelector(id);
+        if(target){
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

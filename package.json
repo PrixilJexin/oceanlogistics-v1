@@ -1,7 +1,0 @@
-{
-  "name": "coal-website-assets",
-  "version": "1.0.0",
-  "scripts": {
-    "copy": "node copy.js"
-  }
-}
