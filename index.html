@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>MISSION OCEAN | Shipping &amp; Logistics</title>
   <meta name="description"
     content="MISSION OCEAN SHIPPING AND LOGISTICS PVT LTD provides container leasing, rental, sales, and logistics solutions.">
@@ -61,6 +61,7 @@
       scroll-behavior: smooth;
       font-size: 16px;
       background: var(--bg);
+      overflow-x: hidden;
     }
 
     body {
@@ -70,6 +71,7 @@
       overflow-x: hidden;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      max-width: 100vw;
     }
 
     a {
@@ -83,6 +85,7 @@
 
     img {
       max-width: 100%;
+      height: auto;
       display: block;
     }
 
@@ -647,10 +650,11 @@
 
     /* ── layout helpers ─────────────────────────────────────── */
     .wrap {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+      padding-left: max(2.5rem, env(safe-area-inset-left));
+      padding-right: max(2.5rem, env(safe-area-inset-right));
       max-width: 1440px;
       margin: 0 auto;
+      width: 100%;
     }
 
     .inner {
@@ -887,21 +891,26 @@
     }
 
     #heroH1 {
-      font-size: clamp(3.5rem, 7.5vw, 8rem);
-      max-width: none;
+      font-size: clamp(2.2rem, 7.5vw, 8rem);
+      max-width: 100%;
       width: 100%;
       margin-bottom: 3rem;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 0.1em;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     #heroH1 .ln {
       display: block;
-      white-space: nowrap;
+      white-space: normal;
       text-align: left;
       font-size: inherit;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      max-width: 100%;
     }
 
     @keyframes heroTagPulse {
@@ -1403,7 +1412,7 @@
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, .02);
       overflow: hidden;
-      min-height: 560px;
+      min-height: 0;
     }
 
     .fab-visual {
@@ -1411,6 +1420,7 @@
       aspect-ratio: 16 / 9;
       background: #050b0b;
       overflow: hidden;
+      width: 100%;
     }
 
     .fab-visual img {
@@ -1443,11 +1453,13 @@
 
     .fab-name {
       font-family: var(--font-disp);
-      font-size: clamp(1.4rem, 2vw, 2.3rem);
+      font-size: clamp(1rem, 2vw, 2.3rem);
       letter-spacing: -.03em;
       line-height: 1.05;
-      max-width: 70%;
+      max-width: 100%;
       color: var(--text-contrast);
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .fab-controls {
@@ -1561,6 +1573,14 @@
       gap: .4rem 1.5rem;
     }
 
+    /* ── contact grid ────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 800px;
+    }
+
     /* ── responsive ─────────────────────────────────────────── */
     @media(max-width:900px) {
       .nav-c {
@@ -1606,6 +1626,7 @@
         width: 100%;
         height: 52vh;
         min-height: 280px;
+        max-height: 60vw;
       }
 
       .vf-frame {
@@ -1626,7 +1647,7 @@
 
       .vf-sidebar {
         width: 100%;
-        padding: 0;
+        padding: 0 1.5rem;
       }
 
       .vf-stage {
@@ -1645,7 +1666,14 @@
       }
 
       #heroH1 {
-        font-size: clamp(2.8rem, 8vw, 5rem);
+        font-size: clamp(2.2rem, 8vw, 5rem);
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      #heroH1 .ln {
+        white-space: normal;
+        word-break: break-word;
       }
 
       .hero .inner {
@@ -1666,8 +1694,14 @@
         gap: 1.5rem;
       }
 
+      /* fab carousel stacks naturally via aspect-ratio */
       .fab-shell {
-        min-height: 420px;
+        min-height: 0;
+      }
+
+      .fab-visual {
+        aspect-ratio: 16 / 9;
+        width: 100%;
       }
 
       .fab-meta {
@@ -1691,8 +1725,8 @@
 
     @media(max-width:600px) {
       .wrap {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding-left: max(1.5rem, env(safe-area-inset-left));
+        padding-right: max(1.5rem, env(safe-area-inset-right));
       }
 
       nav {
@@ -1710,19 +1744,34 @@
 
       .nav-r .btn {
         padding: .7rem .95rem;
+        font-size: .62rem;
       }
 
       #heroH1 {
-        font-size: clamp(2.4rem, 9vw, 4rem);
+        font-size: clamp(2rem, 9vw, 3.8rem);
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      #heroH1 .ln {
+        white-space: normal;
+        word-break: break-word;
       }
 
       .cluster {
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: 1.2rem;
+      }
+
+      /* push button to its own row on small screens */
+      .cluster .btn[style*="margin-left:auto"] {
+        margin-left: 0 !important;
+        width: 100%;
+        justify-content: center;
       }
 
       .hero-stat {
-        min-width: 120px;
+        min-width: 100px;
       }
 
       .sec-head {
@@ -1752,23 +1801,29 @@
       }
 
       .vf-sidebar {
-        padding: 2rem 0 3rem;
+        padding: 1.5rem 1.5rem 3rem;
       }
 
       .vf-num-wrap {
         right: 1.5rem;
       }
 
-      .fab-shell {
-        min-height: 330px;
+      /* contact grid stacks on mobile */
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
+      /* fab carousel: maintain good aspect ratio on mobile */
       .fab-visual {
         aspect-ratio: 4 / 3;
+        width: 100%;
       }
 
       .fab-name {
-        font-size: clamp(1.1rem, 5vw, 1.7rem);
+        font-size: clamp(.9rem, 4.5vw, 1.5rem);
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
 
       .tl {
@@ -1779,12 +1834,16 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      #contact {
+        padding: 5rem 0 !important;
+      }
     }
 
     @media(max-width:480px) {
       .wrap {
-        padding-left: 1.2rem;
-        padding-right: 1.2rem;
+        padding-left: max(1.2rem, env(safe-area-inset-left));
+        padding-right: max(1.2rem, env(safe-area-inset-right));
       }
 
       nav {
@@ -1805,7 +1864,19 @@
       }
 
       #heroH1 {
-        font-size: clamp(2.1rem, 11vw, 3.1rem);
+        font-size: clamp(1.8rem, 10vw, 3rem);
+        white-space: normal;
+        word-break: break-word;
+        margin-bottom: 2rem;
+      }
+
+      #heroH1 .ln {
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .hero .inner {
+        padding-bottom: 2rem;
       }
 
       .hero-tag {
@@ -1832,15 +1903,27 @@
         bottom: .8rem;
       }
 
+      .fab-visual {
+        aspect-ratio: 1 / 1;
+      }
+
       .fab-name {
-        font-size: 1rem;
+        font-size: clamp(.8rem, 4vw, 1.2rem);
+      }
+
+      .cluster {
+        gap: 1rem;
+      }
+
+      .hero-stat {
+        min-width: 80px;
       }
     }
 
     @media(max-width:360px) {
       .wrap {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
       }
 
       .nav-r .btn {
@@ -1852,11 +1935,16 @@
       }
 
       #heroH1 {
-        font-size: clamp(1.8rem, 10vw, 2.7rem);
+        font-size: clamp(1.6rem, 10vw, 2.5rem);
+        word-break: break-word;
       }
 
       .hero-stat {
-        min-width: 90px;
+        min-width: 80px;
+      }
+
+      .cluster {
+        gap: .8rem;
       }
     }
 
@@ -2196,7 +2284,7 @@
         <h2 class="disp" data-split style="font-size:clamp(2.5rem,6vw,5rem);margin-top:.8rem;margin-bottom:3rem">
           Let’s move forward.
         </h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:800px">
+        <div class="contact-grid">
           <div data-rv>
             <div class="label dim" style="margin-bottom:.6rem">Email</div>
             <a href="mailto:Operation@missionocean.in"
