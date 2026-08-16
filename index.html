@@ -169,6 +169,10 @@
       letter-spacing: -.04em;
       line-height: 1;
       font-variant-numeric: tabular-nums;
+      opacity: 0;
+      transition: opacity .18s ease;
+      min-width: 1ch;
+      text-align: center;
     }
 
     .loader-bar {
@@ -1739,6 +1743,85 @@
       }
     }
 
+    @media(max-width:480px) {
+      .wrap {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+      }
+
+      nav {
+        padding: 1rem 1.2rem;
+      }
+
+      .brand {
+        gap: .45rem;
+      }
+
+      .brand-mark {
+        width: 26px;
+        height: 26px;
+      }
+
+      .brand-text {
+        font-size: .72rem;
+      }
+
+      #heroH1 {
+        font-size: clamp(2.1rem, 11vw, 3.1rem);
+      }
+
+      .hero-tag {
+        font-size: .56rem;
+      }
+
+      .hero-stat-val {
+        font-size: 1.15rem;
+      }
+
+      .hero-stat-lbl {
+        font-size: .54rem;
+      }
+
+      .cap2-item,
+      .vf-sidebar {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+      }
+
+      .fab-meta {
+        left: .8rem;
+        right: .8rem;
+        bottom: .8rem;
+      }
+
+      .fab-name {
+        font-size: 1rem;
+      }
+    }
+
+    @media(max-width:360px) {
+      .wrap {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .nav-r .btn {
+        padding: .6rem .8rem;
+      }
+
+      .brand-text {
+        font-size: .64rem;
+      }
+
+      #heroH1 {
+        font-size: clamp(1.8rem, 10vw, 2.7rem);
+      }
+
+      .hero-stat {
+        min-width: 90px;
+      }
+    }
+
     body.is-loading {
       overflow: hidden;
     }
@@ -1759,7 +1842,7 @@
       <span class="label dim">EST. 1979</span>
     </div>
     <div class="loader-mid">
-      <div class="loader-count" id="lcount" aria-live="polite">0</div>
+      <div class="loader-count" id="lcount" aria-live="polite"></div>
     </div>
     <div class="loader-bot wrap">
       <div class="loader-bar"><i id="lbar"></i></div>
@@ -2752,7 +2835,10 @@
           v: 100, duration: 1.6, ease: 'power1.inOut',
           onUpdate: function () {
             var v = Math.round(o.v);
-            if (count) count.textContent = v;
+            if (count) {
+              count.textContent = v > 0 ? String(v) : '';
+              count.style.opacity = v > 0 ? '1' : '0';
+            }
             if (bar) bar.style.right = (100 - v) + '%';
           }
         }, 0);
