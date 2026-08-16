@@ -39,12 +39,12 @@
     :root {
       --bg: #010101;
       --fg: #f1f0ea;
-      --dim: rgba(255, 118, 73, 0.971);
+      --dim: rgba(68, 175, 213, 0.971);
       --border: rgba(241, 240, 234, .1);
       --accent: #c8b89a;
       --font-disp: "LARAZ", "Outfit", sans-serif;
       --font-mono: "JetBrains Mono", monospace;
-      --ease: cubic-bezier(.16, .8, .24, 1);  
+      --ease: cubic-bezier(.16, .8, .24, 1);
       --r: 2px;
     }
 
@@ -235,7 +235,7 @@
       height: 72px;
       object-fit: contain;
       display: block;
-      filter: brightness(1.1);  
+      filter: brightness(1.1);
       flex-shrink: 0;
     }
 
@@ -826,13 +826,11 @@
       inset: 0;
       z-index: 1;
       background:
-        repeating-linear-gradient(
-          to bottom,
+        repeating-linear-gradient(to bottom,
           rgba(255, 255, 255, .08),
           rgba(255, 255, 255, .08) 1px,
           transparent 1px,
-          transparent 3px
-        ),
+          transparent 3px),
         linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(0, 0, 0, .18));
       mix-blend-mode: screen;
       opacity: .35;
@@ -1435,7 +1433,7 @@
     .fab-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.68));
+      background: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .68));
       pointer-events: none;
     }
 
@@ -1660,12 +1658,29 @@
       }
 
       /* Stack one image followed by its content using flexbox order */
-      .vf-media > .vf-frame:nth-child(1) { order: 1; }
-      .vf-sidebar > .vf-stage:nth-child(1) { order: 2; }
-      .vf-media > .vf-frame:nth-child(2) { order: 3; }
-      .vf-sidebar > .vf-stage:nth-child(2) { order: 4; }
-      .vf-media > .vf-frame:nth-child(3) { order: 5; }
-      .vf-sidebar > .vf-stage:nth-child(3) { order: 6; }
+      .vf-media>.vf-frame:nth-child(1) {
+        order: 1;
+      }
+
+      .vf-sidebar>.vf-stage:nth-child(1) {
+        order: 2;
+      }
+
+      .vf-media>.vf-frame:nth-child(2) {
+        order: 3;
+      }
+
+      .vf-sidebar>.vf-stage:nth-child(2) {
+        order: 4;
+      }
+
+      .vf-media>.vf-frame:nth-child(3) {
+        order: 5;
+      }
+
+      .vf-sidebar>.vf-stage:nth-child(3) {
+        order: 6;
+      }
 
       .vf-progress,
       .vf-num-wrap {
@@ -2172,7 +2187,7 @@
     </section>
 
     <!-- ④  ABOUT / ORIGIN -->
-    <section class="close" id="about">  
+    <section class="close" id="about">
       <div class="bg">
         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600&q=70" alt="" aria-hidden="true"
           loading="lazy">
@@ -2183,7 +2198,8 @@
           style="font-size:clamp(2rem,5vw,4.5rem);max-width:700px;margin-top:.8rem;margin-bottom:2rem">
           Container solutions built around your business.
         </h2>
-        <p style="max-width:520px;color:var(--text-dim-contrast);line-height:1.7;margin-bottom:2.5rem;font-weight:500" data-rv>
+        <p style="max-width:520px;color:var(--text-dim-contrast);line-height:1.7;margin-bottom:2.5rem;font-weight:500"
+          data-rv>
           Mission Ocean Shipping and Logistics Pvt Ltd is a professionally managed company specializing in container
           leasing, rental, and sales solutions. We serve shipping lines, freight forwarders, logistics companies,
           exporters, importers, traders, and businesses involved in global supply chains.
@@ -2258,7 +2274,8 @@
         </div>
         <div class="fab-shell" data-fab-carousel>
           <div class="fab-visual">
-            <img src="images/Fabricated container as Rack used for storage..png" alt="Fabricated container as Rack used for storage..png">
+            <img src="images/Fabricated container as Rack used for storage..png"
+              alt="Fabricated container as Rack used for storage..png">
             <div class="fab-overlay"></div>
             <div class="fab-meta">
               <div class="fab-name">Fabricated container as Rack used for storage..png</div>
@@ -2276,7 +2293,8 @@
           style="font-size:clamp(2rem,4vw,3.5rem);max-width:600px;margin-top:.8rem;margin-bottom:2rem">
           Why choose Mission Ocean?
         </h2>
-        <p style="max-width:480px;color:var(--text-dim-contrast);line-height:1.7;margin-bottom:2.5rem;font-weight:500" data-rv>
+        <p style="max-width:480px;color:var(--text-dim-contrast);line-height:1.7;margin-bottom:2.5rem;font-weight:500"
+          data-rv>
           Reliable container solutions, flexible leasing and rental options, competitive pricing, professional service,
           quality-focused operations, and long-term business relationships.
         </p>
