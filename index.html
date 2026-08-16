@@ -1617,48 +1617,55 @@
       #vfSeq {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
         min-height: auto;
       }
 
       .vf-media {
-        position: relative;
-        width: 100%;
-        height: 52vh;
-        min-height: 280px;
-        max-height: 60vw;
-      }
-
-      .vf-frame {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity .45s ease, transform .45s ease;
-        transform: scale(1.02);
-      }
-
-      .vf-frame.is-active {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1);
+        display: contents;
       }
 
       .vf-sidebar {
+        display: contents;
+      }
+
+      .vf-frame {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
         width: 100%;
-        padding: 0 1.5rem;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        aspect-ratio: 16 / 9;
+      }
+
+      .vf-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
       }
 
       .vf-stage {
-        display: none;
-        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .6rem;
+        opacity: 1;
+        transform: none;
+        padding: 0 max(1.5rem, env(safe-area-inset-left)) 2rem max(1.5rem, env(safe-area-inset-right));
       }
 
-      .vf-stage.is-active {
-        display: flex;
-        opacity: 1;
-      }
+      /* Stack one image followed by its content using flexbox order */
+      .vf-media > .vf-frame:nth-child(1) { order: 1; }
+      .vf-sidebar > .vf-stage:nth-child(1) { order: 2; }
+      .vf-media > .vf-frame:nth-child(2) { order: 3; }
+      .vf-sidebar > .vf-stage:nth-child(2) { order: 4; }
+      .vf-media > .vf-frame:nth-child(3) { order: 5; }
+      .vf-sidebar > .vf-stage:nth-child(3) { order: 6; }
 
       .vf-progress,
       .vf-num-wrap {
@@ -1800,7 +1807,7 @@
         font-size: clamp(1.9rem, 10vw, 3.25rem);
       }
 
-      .vf-sidebar {
+      .vf-stage {
         padding: 1.5rem 1.5rem 3rem;
       }
 
@@ -1892,7 +1899,7 @@
       }
 
       .cap2-item,
-      .vf-sidebar {
+      .vf-stage {
         padding-left: 1.1rem;
         padding-right: 1.1rem;
       }
@@ -2512,41 +2519,6 @@
         if (reduced && !isMobile) seq.classList.add('is-static');
 
         if (isMobile) {
-          if (frames.length) {
-            var dots = document.createElement('div');
-            dots.className = 'vf-dots';
-            Array.prototype.forEach.call(frames, function (_, idx) {
-              var dot = document.createElement('span');
-              if (idx === 0) dot.classList.add('is-active');
-              dots.appendChild(dot);
-            });
-            seq.appendChild(dots);
-            var current = 0;
-            var timer;
-            function setSlide(next) {
-              current = (next + frames.length) % frames.length;
-              frames.forEach(function (frame, index) {
-                frame.classList.toggle('is-active', index === current);
-              });
-              stages.forEach(function (stage, index) {
-                stage.classList.toggle('is-active', index === current);
-              });
-              if (dots) {
-                var dotEls = dots.querySelectorAll('span');
-                dotEls.forEach(function (dot, index) {
-                  dot.classList.toggle('is-active', index === current);
-                });
-              }
-              if (num) num.textContent = String(current + 1).padStart(2, '0');
-            }
-            setSlide(0);
-            timer = setInterval(function () { setSlide(current + 1); }, 3000);
-            seq.addEventListener('mouseenter', function () { clearInterval(timer); }, { passive: true });
-            seq.addEventListener('mouseleave', function () {
-              clearInterval(timer);
-              timer = setInterval(function () { setSlide(current + 1); }, 3000);
-            }, { passive: true });
-          }
           return;
         }
 
